@@ -1,22 +1,28 @@
-taglib.go
+go-taglib
 =========
 
 Interface to the taglib audio tagging library with MIT license.
+
+Install
+-------
+
+    go get github.com/vbatts/go-taglib/taglib
+
 
 Example
 -------
 
     package main
 
-    import "bitbucket.org/taruti/taglib.go"
+    import "github.com/vbatts/go-taglib/taglib"
     import "fmt"
 
     func main() {
         f := taglib.Open("foo.mp3")
         if f==nil { return }
         defer f.Close()
-        fmt.Printf("%v\n",f.GetTags())
-        fmt.Printf("%v\n",f.GetProperties())
+        fmt.Printf("%#v\n",f.GetTags())
+        fmt.Printf("%#v\n",f.GetProperties())
     }
 
 
