@@ -17,12 +17,20 @@ type Properties struct {
 
 type File C.TagLib_File
 
+/*
+Return a taglib.File from music file filename
+
+If nil, then the file could not be opened.
+*/
 func Open(filename string) *File {
 	fp := C.CString(filename)
 	defer C.free(unsafe.Pointer(fp))
 	return (*File)(C.taglib_file_new(fp))
 }
 
+/*
+Free and close a taglib.File
+*/
 func (f *File) Close() {
 	C.taglib_file_free((*C.TagLib_File)(f))
 }
