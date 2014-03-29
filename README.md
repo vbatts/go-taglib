@@ -26,10 +26,13 @@ Interface to the taglib audio tagging library with MIT license.
 ## Dependencies
 
 On debian:
-	apt-get install libtagc0-dev
+
+    apt-get install libtagc0-dev
 
 On Fedora:
- 	yum install install taglib-devel
+
+    yum install install taglib-devel
 
 On OS X:
-	brew install taglib
+
+    brew install taglib
