@@ -3,14 +3,12 @@ go-taglib
 
 Interface to the taglib audio tagging library with MIT license.
 
-Install
--------
+## Install
 
     go get github.com/vbatts/go-taglib/taglib
 
 
-Example
--------
+## Example
 
     package main
 
@@ -25,12 +23,16 @@ Example
         fmt.Printf("%#v\n",f.GetProperties())
     }
 
-Dependencies
-------------
+## Dependencies
 
 On debian:
-	apt-get install libtagc0-dev
+
+    apt-get install libtagc0-dev
 
 On Fedora:
- 	yum install install taglib-devel
 
+    yum install install taglib-devel
+
+On OS X:
+
+    brew install taglib
