@@ -1,7 +1,23 @@
 package taglib
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
+func TestCreate(t *testing.T) {
+	name := "/tmp/test1.mp3"
+	os.Remove(name)
+	f := Create(name, TypeMPEG)
+	if f == nil {
+		t.Fatal("expected to open file, but got a NULL")
+	}
+	defer f.Close()
+	defer os.Remove(name)
+	if !f.Save() {
+		t.Error("failed to save created file")
+	}
+}
 func TestFile(t *testing.T) {
 	f := Open("testdata/id3v1.mp3")
 	if f == nil {

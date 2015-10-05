@@ -8,6 +8,21 @@ package taglib
 import "C"
 import "unsafe"
 
+type Type C.TagLib_File_Type
+
+const (
+	TypeMPEG      Type = C.TagLib_File_MPEG
+	TypeOggVorbis Type = C.TagLib_File_OggVorbis
+	TypeFLAC      Type = C.TagLib_File_FLAC
+	TypeMPC       Type = C.TagLib_File_MPC
+	TypeOggFlac   Type = C.TagLib_File_OggFlac
+	TypeWavPack   Type = C.TagLib_File_WavPack
+	TypeSpeex     Type = C.TagLib_File_Speex
+	TypeTrueAudio Type = C.TagLib_File_TrueAudio
+	TypeMP4       Type = C.TagLib_File_MP4
+	TypeASF       Type = C.TagLib_File_ASF
+)
+
 // Tags are the tag fields accesible
 type Tags struct {
 	Title, Artist, Album, Comment, Genre string
@@ -21,6 +36,13 @@ type Properties struct {
 
 // File is the means to access properties, and set tags.
 type File C.TagLib_File
+
+// Create a new file with the provided type
+func Create(filename string, t Type) *File {
+	fp := C.CString(filename)
+	defer C.free(unsafe.Pointer(fp))
+	return (*File)(C.taglib_file_new_type(fp, (C.TagLib_File_Type)(t)))
+}
 
 // Open returns a taglib.File from music file filename. If nil, then the file
 // could not be opened.
