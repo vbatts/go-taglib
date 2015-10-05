@@ -1,8 +1,10 @@
 package taglib
 
-//#include <taglib/tag_c.h>
-//#include <stdlib.h>
-// #cgo LDFLAGS: -ltag_c
+/*
+#include <stdlib.h>
+#include <taglib/tag_c.h>
+#cgo LDFLAGS: -ltag_c
+*/
 import "C"
 import "unsafe"
 
@@ -28,16 +30,12 @@ func Open(filename string) *File {
 	return (*File)(C.taglib_file_new(fp))
 }
 
-/*
-Free and close a taglib.File
-*/
+// Free and close a taglib.File
 func (f *File) Close() {
 	C.taglib_file_free((*C.TagLib_File)(f))
 }
 
-/*
-Get the ID3 taglib.Tags from this taglib.File
-*/
+// Get the ID3 taglib.Tags from this taglib.File
 func (f *File) GetTags() *Tags {
 	ts := C.taglib_file_tag((*C.TagLib_File)(f))
 
@@ -57,9 +55,7 @@ func (f *File) GetTags() *Tags {
 	return &a
 }
 
-/*
-Get the taglib.Properties from this taglib.File
-*/
+// Get the taglib.Properties from this taglib.File
 func (f *File) GetProperties() *Properties {
 	ap := C.taglib_file_audioproperties((*C.TagLib_File)(f))
 	if ap == nil {
@@ -76,9 +72,7 @@ func (f *File) GetProperties() *Properties {
 	return &p
 }
 
-/*
-Get the ID3 taglib.Tags from filename
-*/
+// Get the ID3 taglib.Tags from filename
 func GetTags(filename string) *Tags {
 	tf := Open(filename)
 	if tf == nil {
@@ -88,9 +82,7 @@ func GetTags(filename string) *Tags {
 	return tf.GetTags()
 }
 
-/*
-Get the taglib.Properties from filename
-*/
+// Get the taglib.Properties from filename
 func GetProperties(filename string) *Properties {
 	tf := Open(filename)
 	if tf == nil {
