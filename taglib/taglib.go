@@ -30,6 +30,12 @@ func Open(filename string) *File {
 	return (*File)(C.taglib_file_new(fp))
 }
 
+// Returns true if the file is open and readble and valid information for the
+// Tag and / or AudioProperties was found.
+func (f *File) Valid() bool {
+	return C.taglib_file_is_valid((*C.TagLib_File)(f)) == C.int(1)
+}
+
 // Free and close a taglib.File
 func (f *File) Close() {
 	C.taglib_file_free((*C.TagLib_File)(f))

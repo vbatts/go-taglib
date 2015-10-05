@@ -5,9 +5,13 @@ import "testing"
 func TestFile(t *testing.T) {
 	f := Open("testdata/id3v1.mp3")
 	if f == nil {
-		t.Error("expected to open file, but got a NULL")
+		t.Fatal("expected to open file, but got a NULL")
 	}
 	defer f.Close()
+
+	if !f.Valid() {
+		t.Fatal("file is not valid")
+	}
 
 	exTags := Tags{Title: "Title", Artist: "Artist", Album: "Album", Comment: "", Genre: "Blues", Year: 0, Track: 0}
 	tags := f.GetTags()
